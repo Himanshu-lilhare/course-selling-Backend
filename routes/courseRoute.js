@@ -2,7 +2,7 @@ import express from "express"
 import { addlectures, createcourse, deletecourse, deletelecture, getallcourses, getcourselectures } from "../controllers/coursesController.js"
 import { singleupload } from "../middlewares/multer.js"
 
-import {getaccessafterlogin, adminORuser } from "../middlewares/findWhichUserLogin.js"
+import {getaccessafterlogin, adminORuser, isTestAdmin } from "../middlewares/findWhichUserLogin.js"
 import { subscriberOrNot } from "../middlewares/subscriberOrNot.js"
 const router=express.Router()
 
@@ -18,5 +18,5 @@ post(getaccessafterlogin,adminORuser,singleupload, addlectures )
 .delete(getaccessafterlogin,adminORuser,deletecourse)
 
 // for delete lectures
-router.route("/lecture").delete(getaccessafterlogin,adminORuser,deletelecture)
+router.route("/lecture").delete(getaccessafterlogin,isTestAdmin,deletelecture)
 export default router

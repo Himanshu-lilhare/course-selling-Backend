@@ -21,13 +21,7 @@ dbconnect()
     key_id: process.env.RAZOR_PAY_APIKEY,
     key_secret: process.env.RAZOR_PAY_SECRET_KEY,
   });
-   nodeCrone.schedule("0 0 1 * * *",async()=>{
-    try {
-      await statsModel.create({})
-    } catch (error) {
-     res.send(error)
-    }
-   })
+
 
    
 
