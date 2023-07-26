@@ -5,7 +5,7 @@ import { catchAsyncError } from "./catchAsyncError.js";
 export const subscriberOrNot=catchAsyncError(async(req,res,next)=>{
     const user=await usermodel.findById(req.user._id)
 
-    if(user.subscription.status==="active" || user.role==="admin"){
+    if(user.subscription.status==="active" || user.role==="admin" || user.role==='testadmin' ){
         next()
     }
     else(

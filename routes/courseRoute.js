@@ -18,5 +18,5 @@ post(getaccessafterlogin,adminORuser,singleupload, addlectures )
 .delete(getaccessafterlogin,adminORuser,deletecourse)
 
 // for delete lectures
-router.route("/lecture").delete(getaccessafterlogin,isTestAdmin,deletelecture)
+router.route("/lecture").delete(getaccessafterlogin,adminORuser,deletelecture)
 export default router
