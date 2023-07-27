@@ -64,6 +64,7 @@ export const getrazorpaykey=catchAsyncError(async(req,res,next)=>{
 export const canclesubs=catchAsyncError(async(req,res,next)=>{
   const user=await usermodel.findById(req.user._id)
   const subscriptionid=user.subscription.id
+  console.log('aaya')
   // let refund=false
   const payment=await Payment.findOne({razorpay_subscription_id:subscriptionid})
  
@@ -74,10 +75,12 @@ export const canclesubs=catchAsyncError(async(req,res,next)=>{
 
   const validUpto=process.env.VALID_DAY * 24 * 60 * 60 * 1000
   if(gap<=validUpto){
+    user.subscription.id=null
+    user.subscription.status=''
+    await user.save()
     await instance.payments.refund(payment.razorpay_payment_id)
     await payment.remove()
-user.subscription.id=undefined
-user.subscription.status=undefined
+
 res.status(200).json({
   message: "you have Refund will happen under 3 days"
 })
