@@ -17,8 +17,10 @@ const subscription= await instance.subscriptions.create({
     customer_notify: 1,
     total_count: 12,
 })
+console.log("its Gone")
 user.subscription.id=subscription.id
 user.subscription.status=subscription.status
+
 await user.save()
 res.status(200).json({
     success:true
@@ -52,6 +54,7 @@ const {razorpay_payment_id,razorpay_subscription_id
 })
 
 export const getrazorpaykey=catchAsyncError(async(req,res,next)=>{
+
   res.status(200).json({
     success:true,
     key:process.env.RAZOR_PAY_APIKEY
